@@ -1,11 +1,9 @@
 # 检测的接口函数
 
 import cv2
-# import mydetect     #yolo检测
+import mydetect     #yolo检测
 import myfatigue    #疲劳检测
 import time
-
-cap = cv2.VideoCapture(0)
 
 def frametest(frame):
     # frame为帧输入
@@ -24,23 +22,23 @@ def frametest(frame):
     
 
     # yolo检测
-    # action = mydetect.predict(frame)
-    # for label, prob, xyxy in action:
-    #     # 在labellist加入当前label
-    #     labellist.append(label)
+    action = mydetect.predict(frame)
+    for label, prob, xyxy in action:
+        # 在labellist加入当前label
+        labellist.append(label)
 
-    #     # 将标签和置信度何在一起
-    #     text = label + str(prob)
+        # 将标签和置信度何在一起
+        text = label + str(prob)
 
-    #     # 画出识别框
-    #     left = int(xyxy[0])
-    #     top = int(xyxy[1])
-    #     right = int(xyxy[2])
-    #     bottom = int(xyxy[3])
-    #     cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 1)
+        # 画出识别框
+        left = int(xyxy[0])
+        top = int(xyxy[1])
+        right = int(xyxy[2])
+        bottom = int(xyxy[3])
+        cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 1)
 
-    #     # 在框的左上角画出标签和置信度
-    #     cv2.putText(frame,text,(left, top-5),cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 1)
+        # 在框的左上角画出标签和置信度
+        cv2.putText(frame,text,(left, top-5),cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 1)
 
     # 将信息加入到ret中
     ret.append(labellist)
